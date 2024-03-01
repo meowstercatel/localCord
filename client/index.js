@@ -5,7 +5,7 @@
 // const { WebSocket } = require("ws");
 const ws = new WebSocket('ws://localhost:8080');
 
-ws.on('open', () => {
+ws.addEventListener('open', () => {
   console.log('Connected to WebSocket server.');
 
   let username = "sillyCat"
@@ -16,7 +16,7 @@ ws.on('open', () => {
   }, 500);
 });
 
-ws.on('message', message => {
+ws.addEventListener('message', message => {
     message = JSON.parse(message)
     console.log(message)
     switch(message.type) {
