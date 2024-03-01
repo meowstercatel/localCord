@@ -17,7 +17,7 @@ ws.addEventListener('open', () => {
 });
 
 ws.addEventListener('message', message => {
-    message = JSON.parse(message)
+    message = JSON.parse(message.data)
     console.log(message)
     switch(message.type) {
         case 'register':
