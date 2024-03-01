@@ -22,7 +22,7 @@ If you'd like to contribute to the development of LocalCord, please follow our g
 
 ## License
 
-LocalCord is licensed under [licencja]
+LocalCord is licensed under BSD-3.
 
 ## Contact
 
