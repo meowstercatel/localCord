@@ -23,7 +23,7 @@ class ClientManager {
 
     sendMessage(messageContent) {
         for(const [username, ws] of this.clients.entries()) {
-            ws.send(JSON.stringify({type: "message", content: `${username} | ${messageContent}`}))
+            ws.send(JSON.stringify({type: "message", content: `${username}|${messageContent}`}))
         }
         return 'success'
     }
