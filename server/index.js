@@ -45,11 +45,11 @@ wss.on('connection', ws => {
             case 'sendMessage':
                 result = clientManager.sendMessage(message.content);
                 break;
-                //for now i'll comment this since its not really useful for anything
+                //for now i'll comment this since its not really useful for anything??
                 // ws.send(JSON.stringify({type: "sendMessage", content: result}))
             default:
                 console.log("bad message type!, ", message)
-                break;
+                break; 
         }
     })
 
