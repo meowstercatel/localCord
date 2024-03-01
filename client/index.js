@@ -6,9 +6,10 @@ ws.on('open', () => {
 
   let username = "sillyCat"
   ws.send(JSON.stringify({ type: 'register', content: username }));
+  let message = "its working yippee"
   setTimeout(() => {
-    ws.send(JSON.stringify({type: "sendMessage", content:"worky? worky?"}))
-  }, 2000);
+    ws.send(JSON.stringify({type: "sendMessage", content: message}))
+  }, 500);
 });
 
 ws.on('message', message => {
@@ -18,7 +19,7 @@ ws.on('message', message => {
         case 'register':
             if(message.content === "success") {
                 console.log("registered successfully!")
-            } else console.log("didnt register!")
+            } else console.log("didnt register!, response: ", message.content)
             break;
         case 'message':
             console.log("message recieved!: ", message.content)

@@ -7,14 +7,22 @@ class ClientManager {
       this.clients = new Map();
     }
 
-    addClient(username, ws) {
-        this.clients.set(username, ws);
-        return 'success'
+    addClient(clientname, ws) {
+        let response = "success";
+        for(const [username, ws] of this.clients.entries()) {
+            if(clientname === username) {
+                response = "fail";
+            }
+        }
+        if(response === "success") {
+            this.clients.set(username, ws);
+        }
+        return response;
     }
 
     sendMessage(messageContent) {
         for(const [username, ws] of this.clients.entries()) {
-            ws.send(JSON.stringify({type: "message", content: messageContent}))
+            ws.send(JSON.stringify({type: "message", content: `${username} | ${messageContent}`}))
         }
         return 'success'
     }
@@ -36,7 +44,8 @@ wss.on('connection', ws => {
                 break;
             case 'sendMessage':
                 result = clientManager.sendMessage(message.content);
-                //for now i'll comment this since its not 
+                break;
+                //for now i'll comment this since its not really useful for anything
                 // ws.send(JSON.stringify({type: "sendMessage", content: result}))
             default:
                 console.log("bad message type!, ", message)
