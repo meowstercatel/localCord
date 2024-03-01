@@ -23,6 +23,7 @@ ws.on('message', message => {
             break;
         case 'message':
             console.log("message recieved!: ", message.content)
+            document.getElementById("msg").innerText = "message recieved!"; 
             break;
         default:
             console.log("bad message type!, ", message)
