@@ -1,5 +1,5 @@
 # LocalCord
-[STILL WORKING ON THIS README. PLEASE CONTACT US BY DISCORD: @fozerion, @meowstercatel IF YOU WANNA HELP]
+**STILL WORKING ON THIS README. PLEASE CONTACT US BY DISCORD: @fozerion, @meowstercatel IF YOU WANNA HELP**
 LocalCord is a privacy-focused clone of Discord, that is made with love and silly thoughts. The main idea behind LocalCord is that the host is also the client and vice versa, meaning servers are hosted locally using the WebSocket (WS) library. This approach ensures a higher level of privacy and control over data.
 
 ## Features
