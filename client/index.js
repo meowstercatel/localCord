@@ -1,4 +1,8 @@
-const { WebSocket } = require("ws");
+// uncomment this if you want to run this in node,
+// also if you want to run this in node then you also
+// have to comment HTML functions.
+//
+// const { WebSocket } = require("ws");
 const ws = new WebSocket('ws://localhost:8080');
 
 ws.on('open', () => {
