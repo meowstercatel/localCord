@@ -7,12 +7,11 @@ const ws = new WebSocket('ws://localhost:8080');
 
 ws.addEventListener('open', () => {
   console.log('Connected to WebSocket server.');
-
   let username = "sillyCat"
   ws.send(JSON.stringify({ type: 'register', content: username }));
   let message = "its working yippee"
   setTimeout(() => {
-    ws.send(JSON.stringify({type: "sendMessage", content: message}))
+    ws.send(JSON.stringify({type: "sendMessage", content: message, user: username}))
   }, 500);
 });
 
@@ -25,11 +24,12 @@ ws.addEventListener('message', message => {
             } else console.log("didnt register!, response: ", message.content)
             break;
         case 'message':
-            console.log("message recieved!: ", message.content)
-            document.getElementById("msg").innerText = "message recieved!"; 
+            console.log("message recieved!: ", message.content);
+            document.getElementsByClassName("msg")[0].innerHTML += 
+            '<div id="msg">' + message.user + '|' + message.content + '</div>';
             break;
         default:
-            console.log("bad message type!, ", message)
+            console.log("bad message type!, ", message);
             break;
-    }
+    }   
 });
