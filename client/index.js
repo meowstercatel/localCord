@@ -4,15 +4,11 @@
 //
 // const { WebSocket } = require("ws");
 const ws = new WebSocket('ws://localhost:8080');
+let nickname = "sillyCat"
 
 ws.addEventListener('open', () => {
   console.log('Connected to WebSocket server.');
-  let nickname = "sillyCat"
   ws.send(JSON.stringify({ type: 'register', content: nickname }));
-  let message = "its working yippee"
-  setTimeout(() => {
-    ws.send(JSON.stringify({type: "sendMessage", content: message, sender: nickname}))
-  }, 500);
 });
 
 ws.addEventListener('message', message => {
@@ -33,3 +29,12 @@ ws.addEventListener('message', message => {
             break;
     }   
 });
+
+/*
+#MESSENGER PART
+*/
+
+function sendMessage() {
+    let message = document.getElementById("messageSender").value;
+    ws.send(JSON.stringify({ type: 'message', content: message, sender: nickname }))    ;
+};

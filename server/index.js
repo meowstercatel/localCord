@@ -11,7 +11,7 @@ class UserManager {
         let response = "success";
         for(const [ws, clientname] of this.clients.entries()) {
             if(nickname === clientname) {
-                response = "fail";
+                //response = "fail";
             }
         
         }
@@ -43,7 +43,7 @@ wss.on('connection', ws => {
                 result = userManager.addUser(message.content, ws);
                 ws.send(JSON.stringify({type: "register", content: result}))
                 break;
-            case 'sendMessage':
+            case 'message':
                 result = userManager.sendMessage(message.content, ws);
                 break;
                 //for now i'll comment this since its not really useful for anything??
