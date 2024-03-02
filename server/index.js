@@ -13,6 +13,7 @@ class ClientManager {
             if(clientname === username) {
                 response = "fail";
             }
+        
         }
         if(response === "success") {
             this.clients.set(clientname, ws);
