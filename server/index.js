@@ -11,7 +11,7 @@ class UserManager {
         let response = "success";
         for(const [ws, clientname] of this.clients.entries()) {
             if(nickname === clientname) {
-                //response = "fail";
+                response = "fail";
             }
         
         }
@@ -46,8 +46,6 @@ wss.on('connection', ws => {
             case 'message':
                 result = userManager.sendMessage(message.content, ws);
                 break;
-                //for now i'll comment this since its not really useful for anything??
-                // ws.send(JSON.stringify({type: "sendMessage", content: result}))
             default:
                 console.log("bad message type!, ", message)
                 break; 
