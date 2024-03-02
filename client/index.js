@@ -7,11 +7,11 @@ const ws = new WebSocket('ws://localhost:8080');
 
 ws.addEventListener('open', () => {
   console.log('Connected to WebSocket server.');
-  let username = "sillyCat"
-  ws.send(JSON.stringify({ type: 'register', content: username }));
+  let nickname = "sillyCat"
+  ws.send(JSON.stringify({ type: 'register', content: nickname }));
   let message = "its working yippee"
   setTimeout(() => {
-    ws.send(JSON.stringify({type: "sendMessage", content: message, user: username}))
+    ws.send(JSON.stringify({type: "sendMessage", content: message, sender: nickname}))
   }, 500);
 });
 
@@ -25,8 +25,8 @@ ws.addEventListener('message', message => {
             break;
         case 'message':
             console.log("message recieved!: ", message.content);
-            document.getElementById("messages").innerHTML += 
-            '<div class="msg">' + message.user + '|' + message.content + '</div>';
+            document.getElementById("messenger").innerHTML += 
+            '<div class="msg">' + message.sender + '|' + message.content + '</div>';
             break;
         default:
             console.log("bad message type!, ", message);
