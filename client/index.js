@@ -25,8 +25,8 @@ ws.addEventListener('message', message => {
             break;
         case 'message':
             console.log("message recieved!: ", message.content);
-            document.getElementsByClassName("msg")[0].innerHTML += 
-            '<div id="msg">' + message.user + '|' + message.content + '</div>';
+            document.getElementById("messages").innerHTML += 
+            '<div class="msg">' + message.user + '|' + message.content + '</div>';
             break;
         default:
             console.log("bad message type!, ", message);

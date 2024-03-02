@@ -9,20 +9,20 @@ class ClientManager {
 
     addClient(clientname, ws) {
         let response = "success";
-        for(const [username, ws] of this.clients.entries()) {
+        for(const [ws, clientname] of this.clients.entries()) {
             if(clientname === username) {
                 response = "fail";
             }
         
         }
         if(response === "success") {
-            this.clients.set(clientname, ws);
+            this.clients.set(ws, clientname);
         }
         return response;
     }
 
     sendMessage(messageContent) {
-        for(const [username, ws] of this.clients.entries()) {
+        for(const [ws, username] of this.clients.entries()) {
             ws.send(JSON.stringify({type: "message", content: `${messageContent}`, user: `${username}`}));
         }
         return 'success'
@@ -44,7 +44,7 @@ wss.on('connection', ws => {
                 ws.send(JSON.stringify({type: "register", content: result}))
                 break;
             case 'sendMessage':
-                result = clientManager.sendMessage(message.content);
+                result = clientManager.sendMessage(message.content, ws);
                 break;
                 //for now i'll comment this since its not really useful for anything??
                 // ws.send(JSON.stringify({type: "sendMessage", content: result}))
