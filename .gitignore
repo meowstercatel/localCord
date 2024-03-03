@@ -137,12 +137,15 @@ dist
 .lite_workspace.lua
 
 # Neutralinojs binaries and builds
-/bin
-/dist
+client/bin
+client/dist
 
 # Neutralinojs client (minified)
-neutralino.js
+client/resources/js/neutralino.d.ts
+client/resources/js/neutralino.js
 
 # Neutralinojs related files
 .storage
 *.log
+client/.tmp/*
+
