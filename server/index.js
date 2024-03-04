@@ -7,10 +7,10 @@ class UserManager {
       this.clients = new Map();
     }
 
-    addUser(username, ws) {
+    addUser(clientname, ws) {
         let response = "success";
-        for(const [ws, clientname] of this.clients.entries()) {
-            if(nickname === clientname) {
+        for(const [ws, username] of this.clients.entries()) {
+            if(clientname === username) {
                 response = "fail";
             }
         
@@ -21,12 +21,24 @@ class UserManager {
         return response;
     }
 
+    removeUser(ws) {
+        this.clients.delete(ws)
+    }
+
     sendMessage(messageContent, ws) {
         const senderName = this.clients.get(ws)
         for(const [ws, username] of this.clients.entries()) {
             ws.send(JSON.stringify({type: "message", content: `${messageContent}`, sender: `${senderName}`}));
         }
         return 'success'
+    }
+
+    getUsers() {
+        let userArr = [];
+        for(const [ws, username] of this.clients.entries()) {
+            userArr.push(username)
+        }
+        return userArr
     }
 
 }
@@ -46,6 +58,10 @@ wss.on('connection', ws => {
             case 'message':
                 result = userManager.sendMessage(message.content, ws);
                 break;
+            case 'users':
+                result = userManager.getUsers()
+                ws.send(JSON.stringify({type: "users", content: result}))
+                break;
             default:
                 console.log("bad message type!, ", message)
                 break; 
@@ -54,6 +70,7 @@ wss.on('connection', ws => {
 
 
     ws.on('close', stream => {
+        userManager.removeUser(ws);
         console.log("websocket client disconnected!")
     })
 
