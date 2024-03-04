@@ -16,7 +16,7 @@ class UserManager {
         
         }
         if(response === "success") {
-            this.clients.set(ws, username);
+            this.clients.set(ws, clientname);
         }
         return response;
     }
@@ -28,7 +28,7 @@ class UserManager {
     sendMessage(messageContent, ws) {
         const senderName = this.clients.get(ws)
         for(const [ws, username] of this.clients.entries()) {
-            ws.send(JSON.stringify({type: "message", content: `${messageContent}`, sender: `${senderName}`}));
+            ws.send(JSON.stringify({type: "message", content: `${messageContent}`, author: `${senderName}`}));
         }
         return 'success'
     }
