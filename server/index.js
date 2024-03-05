@@ -4,7 +4,7 @@ const fs = require('fs');
 const sqlite3 = require('sqlite3');
 const db = new sqlite3.Database(':memory:');
 
-db.run("CREATE TABLE messages (content varchar(500), author varchar(60) NOT NULL, timestamp int(11))")
+db.run("CREATE TABLE messages (content varchar(500), author varchar(60), timestamp int(11))")
 
 const wss = new WebSocket.Server({ port: 8080 });
 
@@ -37,16 +37,13 @@ class UserManager {
 
     sendMessage(messageContent, ws) {
         const senderName = this.clients.get(ws)
-        db.run(`INSERT INTO messages(message, author, timestamp) VALUES(?)`,
-            [messageContent],
-            [senderName],
-            [unixTimestamp()],
+        db.run(`INSERT INTO messages(message, author, timestamp) VALUES(?, ?, ?)`, [messageContent, senderName, null],
             function (error) {
                 console.log("added message");
             }
         );
         for (const [ws, username] of this.clients.entries()) {
-            ws.send({ type: "message", content: `${messageContent}`, author: `${senderName}` });
+            ws.send(JSON.stringify({ type: "message", content: `${messageContent}`, author: `${senderName}` }));
         }
         return 'success'
     }
@@ -75,23 +72,24 @@ const userManager = new UserManager();
 
 wss.on('connection', ws => {
     ws.on('message', message => {
+        message = JSON.parse(message)
         console.log(message)
         let result;
         switch (message.type) {
             case 'register':
                 result = userManager.addUser(message.content, ws);
-                ws.send({ type: "register", content: result })
+                ws.send(JSON.stringify({ type: "register", content: result }))
                 break;
             case 'message':
                 result = userManager.sendMessage(message.content, ws);
                 break;
             case 'users':
                 result = userManager.getUsers()
-                ws.send({ type: "users", content: result })
+                ws.send(JSON.stringify({ type: "users", content: result }))
                 break;
             case 'getMessages':
                 result = userManager.getMessages()
-                ws.send({type: "messages", content: result })
+                ws.send(JSON.stringify({type: "messages", content: result }))
                 break;
             default:
                 console.log("bad message type!, ", message)

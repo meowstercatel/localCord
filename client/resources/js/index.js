@@ -11,10 +11,11 @@ function startWebsocketConnection() {
 
     ws.addEventListener('open', () => {
         console.log('Connected to WebSocket server.');
-        ws.send({ type: 'register', content: username });
+        ws.send(JSON.stringify({ type: 'register', content: username }));
     });
 
     ws.addEventListener('message', message => {
+        message = JSON.parse(message)
         switch (message.type) {
             case 'register':
                 if (message.content === "success") {
@@ -48,5 +49,5 @@ try {
 
 function sendMessage() {
     let message = document.getElementById("messageSender").value;
-    ws.send({ type: 'message', content: message });
+    ws.send(JSON.stringify({ type: 'message', content: message }));
 };
