@@ -15,7 +15,7 @@ function startWebsocketConnection() {
     });
 
     ws.addEventListener('message', message => {
-        message = JSON.parse(message)
+        message = JSON.parse(message.data)
         switch (message.type) {
             case 'register':
                 if (message.content === "success") {
@@ -24,8 +24,8 @@ function startWebsocketConnection() {
                 break;
             case 'message':
                 console.log("message recieved!: ", message.content);
-                document.getElementById("messenger").innerHTML +=
-                `<div class="msg"><span class="username">${message.author}</span><span class="msg-content">${message.content}</span></div>`;
+                document.getElementById("messages").innerHTML +=
+                `<div class="message"><span class="username">${message.author}</span><span class="message-content">${message.content}</span></div>`;
                 break;
             default:
                 console.log("bad message type!, ", message);
