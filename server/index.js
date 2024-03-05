@@ -37,8 +37,9 @@ class UserManager {
 
     sendMessage(messageContent, ws) {
         const senderName = this.clients.get(ws)
-        db.run(`INSERT INTO messages(message, author, timestamp) VALUES(?, ?, ?)`, [messageContent, senderName, null],
+        db.run(`INSERT INTO messages(content, author, timestamp) VALUES(?, ?, ?)`, [messageContent, senderName, null],
             function (error) {
+                console.log(error)
                 console.log("added message");
             }
         );
@@ -56,14 +57,17 @@ class UserManager {
         return userArr
     }
 
-    getMessages() {
+    getMessages(ws) {
         let messageArr = [];
-        db.each("SELECT * FROM messages",
-            (error, row) => {
-                console.log("ROW", row)
-                messageArr.push({type: "message", content: row.content, author: row.author})
+        db.all("SELECT * FROM messages", [], (err, rows) => {
+            if (err) {
+              throw err;
             }
-        );
+            rows.forEach((row) => {
+              console.log(row);
+            ws.send(JSON.stringify({type: "message", content: row.content, author: row.author}))
+            });
+          });
     }
 
 }
@@ -88,8 +92,7 @@ wss.on('connection', ws => {
                 ws.send(JSON.stringify({ type: "users", content: result }))
                 break;
             case 'getMessages':
-                result = userManager.getMessages()
-                ws.send(JSON.stringify({type: "messages", content: result }))
+                result = userManager.getMessages(ws)
                 break;
             default:
                 console.log("bad message type!, ", message)
