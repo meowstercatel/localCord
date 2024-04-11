@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localCord</title>
+    <!-- <script src="./js/index.js"></script> -->
+    <!-- <link rel="stylesheet" href="./style/style.css"> -->
+    <link rel="stylesheet" href="./style/bulma.css">
+    <link rel="stylesheet" href="./style/global.css">
+    <style>
+        #connectBox {
+            height: 99%;
+            width: 99%;
+        }
+    </style>
+</head>
+<body>
+    <div id="connectBox" class="is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
+        <h2 class="title is-2">Connect to a server:</h2>
+        <div class="is-flex is-flex-direction-row">
+            <input id="connectInput" class="input mr-2" type="text" placeholder="Text input"/>
+            <button onclick="connect();" id="connectButton" class="button">Connect</button>
+        </div>
+    </div>
+    <script>
+        const localStorage = window.sessionStorage
+        const connect = () => {
+            let ip = document.getElementById('connectInput').value
+            localStorage.setItem('ip', ip);
+            document.location.href="index.html";
+        }
+    </script>
+</body>
+</html>

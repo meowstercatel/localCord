@@ -1,0 +1,12 @@
+html,
+body {
+    font-family: 'Atkinson Hyperlegible';
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: "Atkinson Hyperlegible";
+    src: url('../AtkinsonHyperlegible-Regular.ttf') format('truetype');
+}

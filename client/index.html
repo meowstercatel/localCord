@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localCord</title>
+    <script src="./js/index.js"></script>
+    <!-- <link rel="stylesheet" href="./style/style.css"> -->
+    <link rel="stylesheet" href="./style/bulma.css">
+    <link rel="stylesheet" href="./style/global.css">
+    <style>
+        body, html {
+            height: 100%;
+            overflow: hidden;
+        }
+        #bottom {
+            position: absolute;
+            bottom: 7%;
+            width: 90%;
+        }
+        #bottom input {
+            margin-right: 5%;
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <div>
+            <div class="box is-flex is-flex-direction-column">
+                <span class="username"><strong>username</strong></span>
+                <span class="message-content ml-1 mt-1">message content</span>
+            </div>
+        </div>
+        <div id="bottom" class="is-flex is-flex-shrink-0">
+            <input class="input" type="text" placeholder="Text input" />
+            <button class="button">Send</button>
+            <!--<textarea id="messageSender" name="messageSender" placeholder="meow your message here..."></textarea>
+            <button id="sendMessage" onclick="sendMessage()">send</button>-->
+        </div>
+    </section>
+</body>
+</html>
