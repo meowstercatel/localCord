@@ -1,5 +1,5 @@
 [STILL WORKING ON THIS README. PLEASE CONTACT US BY DISCORD: @fozerion, @meowstercatel IF YOU WANNA HELP]
-
+code is in an another branch
 # LocalCord
 
 LocalCord is a privacy-focused Discord-inspired app, that is made with love and silly thoughts. The main idea behind LocalCord is that the host is also the client and vice versa, meaning servers are hosted locally using the WebSocket (WS) library. This approach ensures a higher level of privacy and control over data.
