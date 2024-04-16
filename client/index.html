@@ -25,15 +25,15 @@
 </head>
 <body>
     <section class="section">
-        <div>
+        <div id="messages">
             <div class="box is-flex is-flex-direction-column">
                 <span class="username"><strong>username</strong></span>
                 <span class="message-content ml-1 mt-1">message content</span>
             </div>
         </div>
         <div id="bottom" class="is-flex is-flex-shrink-0">
-            <input class="input" type="text" placeholder="Text input" />
-            <button class="button">Send</button>
+            <input id="messageSend" class="input" type="text" placeholder="Text input" />
+            <button class="button" onclick="sendMessage();">Send</button>
             <!--<textarea id="messageSender" name="messageSender" placeholder="meow your message here..."></textarea>
             <button id="sendMessage" onclick="sendMessage()">send</button>-->
         </div>

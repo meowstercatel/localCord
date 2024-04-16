@@ -19,15 +19,18 @@
     <div id="connectBox" class="is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
         <h2 class="title is-2">Connect to a server:</h2>
         <div class="is-flex is-flex-direction-row">
-            <input id="connectInput" class="input mr-2" type="text" placeholder="Text input"/>
+            <input id="connectInput" class="input mr-2" type="text" placeholder="SERVER IP"/>
+            <input id="connectUsername" class="input mr-2" type="text" placeholder="USERNAME"/>
             <button onclick="connect();" id="connectButton" class="button">Connect</button>
         </div>
     </div>
     <script>
-        const localStorage = window.sessionStorage
+        const sessionStorage = window.sessionStorage
         const connect = () => {
             let ip = document.getElementById('connectInput').value
-            localStorage.setItem('ip', ip);
+            let username = document.getElementById('connectUsername').value
+            sessionStorage.setItem('ip', ip);
+            sessionStorage.setItem('username', username);
             document.location.href="index.html";
         }
     </script>

@@ -4,7 +4,7 @@
 //
 // const { WebSocket } = require("ws");
 let ws;
-let username = "sillyCat"
+let username = window.sessionStorage.getItem('username');
 let ip = window.sessionStorage.getItem('ip');
 
 function startWebsocketConnection() {
@@ -26,7 +26,7 @@ function startWebsocketConnection() {
             case 'message':
                 console.log("message recieved!: ", message.content);
                 document.getElementById("messages").innerHTML +=
-                `<div class="message"><span class="username">${message.author}</span><span class="message-content">${message.content}</span></div>`;
+                `<div class="box is-flex is-flex-direction-column"><span class="username"><strong>${message.author}</strong></span><span class="message-content ml-1 mt-1">${message.content}</span></div>`;
                 break;
             default:
                 console.log("bad message type!, ", message);
@@ -49,6 +49,6 @@ try {
 */
 
 function sendMessage() {
-    let message = document.getElementById("messageSender").value;
+    let message = document.getElementById("messageSend").value;
     ws.send(JSON.stringify({ type: 'message', content: message }));
 };
