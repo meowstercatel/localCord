@@ -8,7 +8,7 @@ let username = window.sessionStorage.getItem('username');
 let ip = window.sessionStorage.getItem('ip');
 
 function startWebsocketConnection() {
-    ws = new WebSocket(`ws://${ip}:8080`);
+    ws = new WebSocket(`ws://${ip}:17684`);
 
     ws.addEventListener('open', () => {
         console.log('Connected to WebSocket server.');

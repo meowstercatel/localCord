@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@runonflux/nat-upnp": "^1.0.2",
     "sqlite3": "^5.1.7",
     "ws": "^8.16.0"
   }

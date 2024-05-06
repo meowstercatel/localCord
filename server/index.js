@@ -1,12 +1,20 @@
 const WebSocket = require('ws');
 const fs = require('fs');
 
+const natUpnp = require("@runonflux/nat-upnp");
+const client = new natUpnp.Client();
+client
+  .createMapping({
+    public: 17684,
+    private: 17684,
+    ttl: 100,
+  })
 const sqlite3 = require('sqlite3');
 const db = new sqlite3.Database(':memory:');
 
 db.run("CREATE TABLE messages (content varchar(500), author varchar(60), timestamp int(11))")
 
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: 17684 });
 
 function unixTimestamp() {
     return Math.floor(Date.now() / 1000)
