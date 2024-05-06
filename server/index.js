@@ -16,7 +16,7 @@ db.run("CREATE TABLE messages (content varchar(500), author varchar(60), timesta
 
 const wss = new WebSocket.Server({ port: 17684 });
 
-console.log("Your IP is: ", client.getPublicIp());
+client.getPublicIp().then(ip => console.log("Your IP is:", ip))
 
 class UserManager {
     constructor() {
